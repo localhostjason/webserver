@@ -2,7 +2,7 @@ package example
 
 import (
 	"fmt"
-	"webserver/server/config"
+	"github.com/localhostjason/webserver/server/config"
 )
 
 // 自定义的配置路径 可配置

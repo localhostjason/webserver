@@ -1,7 +1,7 @@
 package server
 
 import (
-	"webserver/server/config"
+	"github.com/localhostjason/webserver/server/config"
 )
 
 const _key = "webserver"

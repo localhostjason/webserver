@@ -1,8 +1,8 @@
 package uv
 
 import (
+	"github.com/localhostjason/webserver/server/util/ue"
 	"net/http"
-	"webserver/server/util/ue"
 
 	"github.com/gin-gonic/gin"
 )

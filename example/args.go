@@ -3,7 +3,7 @@ package example
 import (
 	"flag"
 	"fmt"
-	"webserver/server/config"
+	"github.com/localhostjason/webserver/server/config"
 )
 
 func Run() {

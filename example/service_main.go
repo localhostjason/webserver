@@ -2,10 +2,10 @@ package example
 
 import (
 	"errors"
+	"github.com/localhostjason/webserver/server"
+	"github.com/localhostjason/webserver/svc"
 	"os"
 	"syscall"
-	"webserver/server"
-	"webserver/svc"
 
 	log "github.com/sirupsen/logrus"
 )

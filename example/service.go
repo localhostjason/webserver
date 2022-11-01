@@ -3,7 +3,7 @@ package example
 import (
 	"errors"
 	"fmt"
-	"webserver/svc"
+	"github.com/localhostjason/webserver/svc"
 
 	log "github.com/sirupsen/logrus"
 )

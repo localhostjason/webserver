@@ -2,9 +2,9 @@ package uv
 
 import (
 	"github.com/go-playground/validator/v10"
+	"github.com/localhostjason/webserver/server/util/ue"
 	"strconv"
 	"strings"
-	"webserver/server/util/ue"
 
 	"github.com/gin-gonic/gin"
 )

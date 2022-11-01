@@ -3,11 +3,11 @@ package example
 import (
 	"errors"
 	"fmt"
+	"github.com/localhostjason/webserver/server"
+	"github.com/localhostjason/webserver/server/config"
+	"github.com/localhostjason/webserver/svc"
 	"os"
 	"path/filepath"
-	"webserver/server"
-	"webserver/server/config"
-	"webserver/svc"
 )
 
 const _groupService = "service"

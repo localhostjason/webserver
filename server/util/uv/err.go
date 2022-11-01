@@ -1,7 +1,7 @@
 package uv
 
 import (
-	"webserver/server/util/ue"
+	"github.com/localhostjason/webserver/server/util/ue"
 )
 
 const (
