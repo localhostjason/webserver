@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"webserver"
 	"webserver/config"
+	"webserver/server"
 	"webserver/svc"
 )
 
@@ -26,7 +26,7 @@ func getConf() (ServiceConfig, error) {
 		return c, err
 
 	}
-	confWebServer, err := webserver.GetConfig()
+	confWebServer, err := server.GetConfig()
 	if err != nil {
 		return c, err
 	}

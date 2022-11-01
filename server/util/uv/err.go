@@ -1,6 +1,8 @@
 package uv
 
-import "webserver/util/ue"
+import (
+	"webserver/server/util/ue"
+)
 
 const (
 	E_DB_ERROR      = "E_DB_ERROR"

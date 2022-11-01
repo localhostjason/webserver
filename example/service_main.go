@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 	"syscall"
-	"webserver"
+	"webserver/server"
 	"webserver/svc"
 
 	log "github.com/sirupsen/logrus"
@@ -45,9 +45,9 @@ func (m *MainProc) handleSigTerm(sig os.Signal) (err error) {
 	return errors.New("quit by signal " + sig.String())
 }
 
-func startServer(toConsole bool) (*webserver.Server, error) {
+func startServer(toConsole bool) (*server.Server, error) {
 
-	s, err := webserver.NewServer()
+	s, err := server.NewServer()
 	if err != nil {
 		log.Fatalln("failed to start:", err)
 	}
