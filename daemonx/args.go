@@ -1,13 +1,25 @@
-package example
+package daemonx
 
 import (
 	"flag"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/localhostjason/webserver/server/config"
 )
 
-func Run() {
-	configPath := flag.String("p", defaultConfigPath, "path to config")
+var SetViewsFunc func(r *gin.Engine) error
+
+type MainServer struct {
+	DefaultConfigPath string
+	SetViewsFunc      func(r *gin.Engine) error
+}
+
+func NewMainServer(configPath string, setViewsFunc func(r *gin.Engine) error) *MainServer {
+	return &MainServer{DefaultConfigPath: configPath, SetViewsFunc: setViewsFunc}
+}
+
+func (m *MainServer) Run() {
+	configPath := flag.String("p", m.DefaultConfigPath, "path to config")
 	initDB := flag.Bool("i", false, "int db")
 	dumpConfig := flag.Bool("d", false, "dump default config")
 
@@ -39,6 +51,6 @@ func Run() {
 		return
 	}
 
+	SetViewsFunc = m.SetViewsFunc
 	runService(*singleMode, *svcCMD)
-
 }

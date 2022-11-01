@@ -1,4 +1,4 @@
-package example
+package daemonx
 
 import (
 	"errors"
@@ -71,10 +71,12 @@ func startServer(toConsole bool) (*server.Server, error) {
 	}
 
 	//s.SetRecovery(uv.DefaultRecovery(false))
-	//err = s.SetRouter(view.SetView)
-	//if err != nil {
-	//	return nil, err
-	//}
+	if SetViewsFunc != nil {
+		err = s.SetRouter(SetViewsFunc)
+		if err != nil {
+			return nil, err
+		}
+	}
 
 	err = s.Start()
 	if err != nil {
