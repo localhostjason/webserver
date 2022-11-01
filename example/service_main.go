@@ -2,6 +2,7 @@ package example
 
 import (
 	"errors"
+	"github.com/localhostjason/webserver/db"
 	"github.com/localhostjason/webserver/server"
 	"github.com/localhostjason/webserver/svc"
 	"os"
@@ -55,6 +56,18 @@ func startServer(toConsole bool) (*server.Server, error) {
 	err = s.SetLogConfig(toConsole)
 	if err != nil {
 		log.Fatalln("failed to set log:", err)
+	}
+
+	err = s.SetLogConfig(toConsole)
+	if err != nil {
+		log.Fatalln("failed to set log:", err)
+	}
+
+	if err = db.Connect(); err != nil {
+		log.Fatalln(err)
+	}
+	if err = db.InitData(); err != nil {
+		log.Fatalln(err)
 	}
 
 	//s.SetRecovery(uv.DefaultRecovery(false))
