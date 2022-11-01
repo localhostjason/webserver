@@ -1,7 +1,9 @@
 package example
 
 import (
+	"errors"
 	"fmt"
+	"github.com/localhostjason/webserver/db"
 	"github.com/localhostjason/webserver/server/config"
 )
 
@@ -15,4 +17,18 @@ func dumpDefaultConfig() {
 	} else {
 		fmt.Println(string(content))
 	}
+}
+
+func syncDB() (err error) {
+	err = db.Connect()
+	if err != nil {
+		return errors.New(fmt.Sprintf("failed to migrate:%v", err))
+	}
+	err = db.Migrate()
+	if err != nil {
+		return
+	}
+
+	err = db.InitData()
+	return
 }

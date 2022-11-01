@@ -31,6 +31,10 @@ func Run() {
 
 	// DB 初始表结构和默认值
 	if *initDB {
+		if err := syncDB(); err != nil {
+			fmt.Println("error when sync db schema", err)
+			return
+		}
 		fmt.Println("success: sync db schema")
 		return
 	}
