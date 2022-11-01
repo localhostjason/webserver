@@ -51,8 +51,8 @@ func init() {
 
 func NewService(prc *MainProc) (*svc.Svc, error) {
 	//if runtime.GOOS == "windows" {
-	//	svcName := "iguard6center"
-	//	svcDescription := "iguard6 center 服务"
+	//	svcName := "center"
+	//	svcDescription := "center 服务"
 	//	return svc.NewSvc(svcName, svcDescription, prc), nil
 	//} else {
 	//	return svc.NewSvc(c.PidFile, c.DaemonLog, prc), nil
