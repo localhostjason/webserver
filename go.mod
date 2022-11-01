@@ -1,4 +1,4 @@
-module webserver
+module github.com/localhostjason/webserver
 
 go 1.19
 
