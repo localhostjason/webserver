@@ -5,7 +5,7 @@ import (
 	"webserver/config"
 )
 
-// 自定义的配置路径
+// 自定义的配置路径 可配置
 const defaultConfigPath = "D:\\center\\console\\console.json"
 
 func dumpDefaultConfig() {
