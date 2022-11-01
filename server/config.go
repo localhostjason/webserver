@@ -1,6 +1,8 @@
 package server
 
-import "webserver/config"
+import (
+	"webserver/server/config"
+)
 
 const _key = "webserver"
 

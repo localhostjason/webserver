@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"webserver/config"
 	"webserver/server"
+	"webserver/server/config"
 	"webserver/svc"
 )
 

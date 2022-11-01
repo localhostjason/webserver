@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"webserver/config"
+	"webserver/server/config"
 
 	"github.com/gin-gonic/gin"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
