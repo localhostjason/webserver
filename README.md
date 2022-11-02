@@ -6,9 +6,7 @@ go webserver daemon
 2. daemon
 3. conf load
 4. db for mysql sqlite
-
-todo:
-1. daemonx 支持 windows, svc 是支持的
+5. daemonx 支持 windows, linux
 
 用途：
 1. gin server daemon
@@ -45,3 +43,8 @@ func main() {
 2. -x  debug跑
 3. -k start 开启daemon
 4. -k stop  关闭daemon
+
+windows
+
+1. -k install 安装服务
+2. -k uninstall 卸载服务

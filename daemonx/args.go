@@ -27,7 +27,7 @@ func (m *MainServer) Run() {
 
 	// for service
 	singleMode := flag.Bool("x", false, "start, no daemon/service mode")
-	svcCMD := flag.String("k", "", "cmds:start|stop|status")
+	svcCMD := flag.String("k", "", "cmds:start|stop|status, windows: install|uninstall")
 
 	flag.Parse()
 
