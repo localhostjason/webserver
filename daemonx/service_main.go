@@ -71,8 +71,8 @@ func startServer(toConsole bool) (*server.Server, error) {
 	}
 
 	//s.SetRecovery(uv.DefaultRecovery(false))
-	if SetViewsFunc != nil {
-		err = s.SetRouter(SetViewsFunc)
+	if SetMainWorkFunc != nil {
+		err = s.SetRouter(SetMainWorkFunc)
 		if err != nil {
 			return nil, err
 		}

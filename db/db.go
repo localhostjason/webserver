@@ -9,7 +9,11 @@ import (
 var DB *gorm.DB // 作为全局访问的db连接
 
 func Connect() error {
-	dbType := getDbTypeConfig()
+	dbType, enable := getDbTypeConfig()
+	if !enable {
+		fmt.Println("no use db")
+		return nil
+	}
 
 	switch dbType {
 	case "sqlite":

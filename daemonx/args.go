@@ -7,15 +7,17 @@ import (
 	"github.com/localhostjason/webserver/server/config"
 )
 
-var SetViewsFunc func(r *gin.Engine) error
+type MainWorkFunc func(r *gin.Engine) error
+
+var SetMainWorkFunc func(r *gin.Engine) error
 
 type MainServer struct {
 	DefaultConfigPath string
-	SetViewsFunc      func(r *gin.Engine) error
+	SetMainWorkFunc   MainWorkFunc
 }
 
-func NewMainServer(configPath string, setViewsFunc func(r *gin.Engine) error) *MainServer {
-	return &MainServer{DefaultConfigPath: configPath, SetViewsFunc: setViewsFunc}
+func NewMainServer(configPath string, setMainWorkFunc MainWorkFunc) *MainServer {
+	return &MainServer{DefaultConfigPath: configPath, SetMainWorkFunc: setMainWorkFunc}
 }
 
 func (m *MainServer) Run() {
@@ -51,6 +53,6 @@ func (m *MainServer) Run() {
 		return
 	}
 
-	SetViewsFunc = m.SetViewsFunc
+	SetMainWorkFunc = m.SetMainWorkFunc
 	runService(*singleMode, *svcCMD)
 }

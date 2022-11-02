@@ -23,6 +23,7 @@ type SqliteDBConfig struct {
 
 type DbConfig struct {
 	DbType string         `json:"db_type"` // one of mysql . sqlite
+	Enable bool           `json:"enable"`
 	Mysql  MysqlDBConfig  `json:"mysql"`
 	Sqlite SqliteDBConfig `json:"sqlite"`
 }
@@ -47,6 +48,7 @@ func init() {
 
 	c := DbConfig{
 		DbType: "mysql",
+		Enable: true,
 		Mysql:  mc,
 		Sqlite: sc,
 	}
@@ -65,11 +67,8 @@ func getSqliteConfig() SqliteDBConfig {
 	return c.Sqlite
 }
 
-func getDbTypeConfig() string {
+func getDbTypeConfig() (string, bool) {
 	var c DbConfig
 	_ = config.GetConfig(_key, &c)
-	if c.DbType == "" {
-		c.DbType = "sqlite"
-	}
-	return c.DbType
+	return c.DbType, c.Enable
 }
