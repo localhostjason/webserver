@@ -8,12 +8,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-const (
-	START  = "start"
-	STOP   = "stop"
-	STATUS = "status"
-)
-
 func createService(singleMode bool) (*svc.Svc, error) {
 	prc := NewProc(singleMode)
 	svcx, err := NewService(prc)
@@ -23,7 +17,7 @@ func createService(singleMode bool) (*svc.Svc, error) {
 	return svcx, nil
 }
 
-func runService(singleMode bool, cmd string) {
+func RunService(singleMode bool, cmd string) {
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println(r)

@@ -54,5 +54,5 @@ func (m *MainServer) Run() {
 	}
 
 	SetMainWorkFunc = m.SetMainWorkFunc
-	runService(*singleMode, *svcCMD)
+	RunService(*singleMode, *svcCMD)
 }

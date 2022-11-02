@@ -13,8 +13,6 @@ import (
 
 const _groupService = "service"
 
-// 不支持windows系统 需要分 windows 和 linux 暂不支持
-
 type ServiceConfig struct {
 	PidFile   string `json:"pid_file"`
 	DaemonLog string `json:"daemon_log"`
