@@ -9,8 +9,6 @@ import (
 
 type MainWorkFunc func(r *gin.Engine) error
 
-var SetMainWorkFunc func(r *gin.Engine) error
-
 type MainServer struct {
 	DefaultConfigPath string
 	SetMainWorkFunc   MainWorkFunc
@@ -39,13 +37,13 @@ func (m *MainServer) Run() {
 	// commands
 
 	if *dumpConfig {
-		dumpDefaultConfig()
+		DumpDefaultConfig()
 		return
 	}
 
 	// DB 初始表结构和默认值
 	if *initDB {
-		if err := syncDB(); err != nil {
+		if err := SyncDB(); err != nil {
 			fmt.Println("error when sync db schema", err)
 			return
 		}

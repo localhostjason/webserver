@@ -7,7 +7,7 @@ import (
 	"github.com/localhostjason/webserver/server/config"
 )
 
-func dumpDefaultConfig() {
+func DumpDefaultConfig() {
 	content, err := config.GeneDefaultConfig()
 	if err != nil {
 		fmt.Println("failed to generate default config")
@@ -16,7 +16,7 @@ func dumpDefaultConfig() {
 	}
 }
 
-func syncDB() (err error) {
+func SyncDB() (err error) {
 	err = db.Connect()
 	if err != nil {
 		return errors.New(fmt.Sprintf("failed to migrate:%v", err))

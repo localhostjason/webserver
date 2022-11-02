@@ -2,6 +2,7 @@ package daemonx
 
 import (
 	"errors"
+	"github.com/gin-gonic/gin"
 	"github.com/localhostjason/webserver/db"
 	"github.com/localhostjason/webserver/server"
 	"github.com/localhostjason/webserver/svc"
@@ -10,6 +11,8 @@ import (
 
 	log "github.com/sirupsen/logrus"
 )
+
+var SetMainWorkFunc func(r *gin.Engine) error
 
 type MainProc struct {
 	singleMode bool
