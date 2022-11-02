@@ -8,6 +8,7 @@ import (
 	"github.com/localhostjason/webserver/svc"
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 const _groupService = "service"
@@ -50,17 +51,15 @@ func init() {
 }
 
 func NewService(prc *MainProc) (*svc.Svc, error) {
-	//if runtime.GOOS == "windows" {
-	//	svcName := "center"
-	//	svcDescription := "center 服务"
-	//	return svc.NewSvc(svcName, svcDescription, prc), nil
-	//} else {
-	//	return svc.NewSvc(c.PidFile, c.DaemonLog, prc), nil
-	//}
-
-	c, err := getConf()
-	if err != nil {
-		return nil, errors.New(fmt.Sprintf("failed to get daemon config:%v", err))
+	if runtime.GOOS == "windows" {
+		svcName := "center"
+		svcDescription := "center 服务"
+		return svc.NewSvc(svcName, svcDescription, prc), nil
+	} else {
+		c, err := getConf()
+		if err != nil {
+			return nil, errors.New(fmt.Sprintf("failed to get daemon config:%v", err))
+		}
+		return svc.NewSvc(c.PidFile, c.DaemonLog, prc), nil
 	}
-	return svc.NewSvc(c.PidFile, c.DaemonLog, prc), nil
 }

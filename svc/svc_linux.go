@@ -4,6 +4,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"github.com/sevlyar/go-daemon"
 	"log"
 	"os"
 	"os/signal"
@@ -160,4 +161,25 @@ func (s *Svc) DefaultRun() {
 		}
 	}
 
+}
+
+func (s *Svc) RunMain(singleMode bool, cmd string) {
+	switch cmd {
+	case cmdStart:
+		s.Run()
+	case cmdStop:
+		s.Stop()
+	case cmdStatus:
+		if s.Status() == nil {
+			fmt.Println("running")
+		} else {
+			fmt.Println("not running")
+		}
+	default:
+		if singleMode {
+			s.RunSingle()
+		} else {
+			flag.PrintDefaults()
+		}
+	}
 }

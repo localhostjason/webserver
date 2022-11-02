@@ -267,3 +267,30 @@ func (s *Svc) DefaultRun() {
 		}
 	}
 }
+
+func (s *Svc) RunMain(singleMode bool, cmd string) {
+	switch cmd {
+	case cmdInstall:
+		s.Install()
+	case cmdUninstall:
+		s.Uninstall()
+	case cmdStart:
+		s.Start()
+	case cmdStop:
+		s.Stop()
+	case cmdStatus:
+		if s.Status() == nil {
+			fmt.Println("running")
+		} else {
+			fmt.Println("not running")
+		}
+	case cmdService:
+		s.RunService()
+	default:
+		if singleMode {
+			s.RunSingle()
+		} else {
+			flag.PrintDefaults()
+		}
+	}
+}

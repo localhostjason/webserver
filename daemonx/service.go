@@ -35,17 +35,5 @@ func runService(singleMode bool, cmd string) {
 		log.Fatalln("failed to start", err)
 	}
 
-	if singleMode {
-		s.RunSingle()
-	} else if cmd == START {
-		s.Run()
-	} else if cmd == STOP {
-		s.Stop()
-	} else if cmd == STATUS {
-		if s.Status() == nil {
-			fmt.Println("running")
-		} else {
-			fmt.Println("not running")
-		}
-	}
+	s.RunMain(singleMode, cmd)
 }
