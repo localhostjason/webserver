@@ -18,6 +18,7 @@ func NewMainServer(configPath string, setMainWorkFunc MainWorkFunc) *MainServer 
 	return &MainServer{DefaultConfigPath: configPath, SetMainWorkFunc: setMainWorkFunc}
 }
 
+// Run 可根据自己业务 替换扩展
 func (m *MainServer) Run() {
 	configPath := flag.String("p", m.DefaultConfigPath, "path to config")
 	initDB := flag.Bool("i", false, "int db")
@@ -53,4 +54,16 @@ func (m *MainServer) Run() {
 
 	SetMainWorkFunc = m.SetMainWorkFunc
 	RunService(*singleMode, *svcCMD)
+}
+
+func (m *MainServer) LoadTasks(task ...Task) {
+	if len(task) == 0 {
+		return
+	}
+
+	taskGroup := NewTaskGroup()
+	for _, t := range task {
+		taskGroup.Add(t)
+	}
+	TaskGroupManage = taskGroup
 }
