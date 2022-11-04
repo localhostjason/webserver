@@ -90,6 +90,10 @@ func PE(ec string, args ...interface{}) {
 	panic(ue.NewErr(ec, args...))
 }
 
+func OP(code string, args ...interface{}) {
+	panic(ue.NewInfo(code, args...))
+}
+
 // EP err parameter
 func EP(err error) {
 
