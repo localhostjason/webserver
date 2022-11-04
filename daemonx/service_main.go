@@ -13,6 +13,7 @@ import (
 )
 
 var SetMainWorkFunc func(r *gin.Engine) error
+var TaskGroupManage *TaskGroup
 
 type MainProc struct {
 	singleMode bool
@@ -33,7 +34,11 @@ func (m *MainProc) Run(svc *svc.Svc) {
 		return
 	}
 
+	// 可加载一些任务
+	TaskGroupManage.Run()
 	<-m.quit
+
+	TaskGroupManage.Stop()
 	_ = s.Stop()
 }
 
