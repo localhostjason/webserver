@@ -126,13 +126,13 @@ func (s *Server) getTlsConfig(minTlsVersion uint16) *tls.Config {
 		MinVersion: minTlsVersion,
 	}
 
+	if s.conf.RequireCert {
+		tlsConf.ClientAuth = tls.RequestClientCert
+	}
+
 	// 大于 tls 1.3 版本，不做处理
 	if minTlsVersion >= tls.VersionTLS13 {
 		return tlsConf
-	}
-
-	if s.conf.RequireCert {
-		tlsConf.ClientAuth = tls.RequestClientCert
 	}
 
 	// 小于1.3版本， 指定tls加密算法
