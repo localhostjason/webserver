@@ -48,3 +48,5 @@ windows
 
 1. -k install 安装服务
 2. -k uninstall 卸载服务
+3. -k start 开启daemon
+4. -k stop  关闭daemon
