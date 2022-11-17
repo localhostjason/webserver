@@ -12,6 +12,7 @@ require (
 	github.com/sevlyar/go-daemon v0.1.6
 	github.com/sirupsen/logrus v1.9.0
 	golang.org/x/sys v0.1.0
+	google.golang.org/grpc v1.50.1
 	gorm.io/driver/mysql v1.4.3
 	gorm.io/driver/sqlite v1.4.3
 	gorm.io/gorm v1.24.0
@@ -21,6 +22,7 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/goccy/go-json v0.9.7 // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/jonboulle/clockwork v0.3.0 // indirect
@@ -38,7 +40,7 @@ require (
 	golang.org/x/crypto v0.0.0-20221005025214-4161e89ecf1b // indirect
 	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
 	golang.org/x/text v0.3.7 // indirect
-	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

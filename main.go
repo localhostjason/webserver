@@ -62,7 +62,8 @@ func main() {
 	const defaultConfigPath = "D:\\center\\console\\console.json"
 	s := daemonx.NewMainServer(defaultConfigPath, SetView)
 
-	// 可加载一些任务，比如：定时器、或者ws、grpc goroutine
-	//s.LoadTasks(NewTestTask())
+	// 可加载一些任务，比如：定时器任务
+	s.LoadTasks(NewTestTask())
+	//s.LoadGrpcServerApi(...) 配置文件 enable_grpc = true 开启后。s.load grpc api 才有意义
 	s.Run()
 }
