@@ -18,12 +18,12 @@ func NewGrpcServer(listen net.Listener) *GrpcServer {
 }
 
 func (g *GrpcServer) StartGrpc(loadFunc func(*grpc.Server)) {
-	logrus.Info("start grpc server")
+	//logrus.Info("start grpc server")
 
 	grpcServer := grpc.NewServer()
 	GServers = append(GServers, grpcServer)
 
-	logrus.Info("load grpc server handler")
+	//logrus.Info("load grpc server handler")
 	if LoadGserverApiFunc != nil {
 		loadFunc(grpcServer)
 	}
