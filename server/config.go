@@ -25,6 +25,7 @@ func init() {
 		WriteTimeout:   60,
 		MaxHeaderBytes: 2 << 20, // 2MB
 		StopWait:       5,
+		EnableGrpc:     false,
 
 		ResponseHeader: map[string]string{
 			"X-Frame-Options":           "SAMEORIGIN",
@@ -69,6 +70,9 @@ type ConfigServer struct {
 
 	// response Header 响应头
 	ResponseHeader map[string]string `json:"response_header"`
+
+	// grpc
+	EnableGrpc bool `json:"enable_grpc"`
 }
 
 func GetConfig() (ConfigServer, error) {

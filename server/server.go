@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
+	"google.golang.org/grpc"
 	"net"
 	"net/http"
 	"sync"
@@ -20,6 +21,10 @@ type Server struct {
 	conf    ConfigServer
 	servers []*http.Server
 	router  *gin.Engine
+}
+
+func (s *Server) LoadGrpcServerApi(loadFunc func(*grpc.Server)) {
+	LoadGserverApiFunc = loadFunc
 }
 
 func NewServer() (*Server, error) {
@@ -97,6 +102,13 @@ func (s *Server) Start() error {
 		s.servers = append(s.servers, server)
 		// TODO error handling
 		go s.startServer(server, l)
+
+		if s.conf.EnableGrpc {
+			go func() {
+				gs := NewGrpcServer(l)
+				gs.StartGrpc(LoadGserverApiFunc)
+			}()
+		}
 	}
 	return nil
 }
@@ -184,6 +196,9 @@ func (s *Server) Stop() error {
 	wg.Add(len(s.servers))
 	for _, server := range s.servers {
 		go s.stopWaitServer(server, &wg)
+		if s.conf.EnableGrpc {
+			go StopGrpc()
+		}
 	}
 	return nil
 }

@@ -57,6 +57,9 @@ func (m *MainProc) handleSigTerm(sig os.Signal) (err error) {
 func startServer(toConsole bool) (*server.Server, error) {
 
 	s, err := server.NewServer()
+	if LoadGserverApiFunc != nil {
+		s.LoadGrpcServerApi(LoadGserverApiFunc)
+	}
 	if err != nil {
 		log.Fatalln("failed to start:", err)
 	}
