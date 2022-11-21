@@ -1,12 +1,13 @@
 # webserver
-go webserver daemon
+go webserver daemon 库
 
-
+主要功能：
 1. tcp server
 2. daemon
 3. conf load
 4. db for mysql sqlite
 5. daemonx 支持 windows, linux
+6. daemonx 支持 gin+grpc server 
 
 用途：
 1. gin server daemon
@@ -34,8 +35,14 @@ func SetView(r *gin.Engine) error {
 func main() {
 	// 自定义的配置路径 可配置
 	const defaultConfigPath = "配置目录"
-	s := daemonx.NewMainServer(defaultConfigPath, SetView)
-	s.Run()
+	s := daemonx.NewMainServer(defaultConfigPath)
+
+    // 可加载一些任务，比如：定时器任务
+    s.LoadTasks(NewTestTask())
+    //s.LoadGrpcServerApi(...) 配置文件 enable_grpc = true 开启后。s.load grpc api 才有意义
+    
+    s.LoadView(SetView)
+    s.Run()
 }
 ```
 
