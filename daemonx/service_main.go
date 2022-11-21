@@ -81,8 +81,8 @@ func startServer(toConsole bool) (*server.Server, error) {
 		log.Fatalln(err)
 	}
 
-	if AppFunc != nil && len(AppFunc) != 0 {
-		for _, f := range AppFunc {
+	if AppLibHandler != nil && len(AppLibHandler) != 0 {
+		for _, f := range AppLibHandler {
 			if err = f(); err != nil {
 				log.Fatalln(err)
 			}

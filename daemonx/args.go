@@ -77,8 +77,8 @@ func (m *MainServer) LoadView(setView MainWorkFunc) {
 	SetViewFunc = setView
 }
 
-var AppFunc []func() error
+var AppLibHandler []func() error
 
-func (m *MainServer) LoadAppFunc(appFunc ...func() error) {
-	AppFunc = appFunc
+func (m *MainServer) LoadLibHandler(appLibHandler ...func() error) {
+	AppLibHandler = appLibHandler
 }
