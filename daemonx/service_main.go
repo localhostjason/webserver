@@ -12,7 +12,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-var SetMainWorkFunc func(r *gin.Engine) error
+var SetViewFunc func(r *gin.Engine) error
 var TaskGroupManage *TaskGroup
 
 type MainProc struct {
@@ -81,9 +81,17 @@ func startServer(toConsole bool) (*server.Server, error) {
 		log.Fatalln(err)
 	}
 
+	if AppLibHandler != nil && len(AppLibHandler) != 0 {
+		for _, f := range AppLibHandler {
+			if err = f(); err != nil {
+				log.Fatalln(err)
+			}
+		}
+	}
+
 	//s.SetRecovery(uv.DefaultRecovery(false))
-	if SetMainWorkFunc != nil {
-		err = s.SetRouter(SetMainWorkFunc)
+	if SetViewFunc != nil {
+		err = s.SetRouter(SetViewFunc)
 		if err != nil {
 			return nil, err
 		}

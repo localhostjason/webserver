@@ -12,11 +12,10 @@ type MainWorkFunc func(r *gin.Engine) error
 
 type MainServer struct {
 	DefaultConfigPath string
-	SetMainWorkFunc   MainWorkFunc
 }
 
-func NewMainServer(configPath string, setMainWorkFunc MainWorkFunc) *MainServer {
-	return &MainServer{DefaultConfigPath: configPath, SetMainWorkFunc: setMainWorkFunc}
+func NewMainServer(configPath string) *MainServer {
+	return &MainServer{DefaultConfigPath: configPath}
 }
 
 // Run 可根据自己业务 替换扩展
@@ -53,7 +52,6 @@ func (m *MainServer) Run() {
 		return
 	}
 
-	SetMainWorkFunc = m.SetMainWorkFunc
 	RunService(*singleMode, *svcCMD)
 }
 
@@ -73,4 +71,14 @@ var LoadGserverApiFunc func(server *grpc.Server)
 
 func (m *MainServer) LoadGrpcServerApi(loadFunc func(*grpc.Server)) {
 	LoadGserverApiFunc = loadFunc
+}
+
+func (m *MainServer) LoadView(setView MainWorkFunc) {
+	SetViewFunc = setView
+}
+
+var AppLibHandler []func() error
+
+func (m *MainServer) LoadLibHandler(appLibHandler ...func() error) {
+	AppLibHandler = appLibHandler
 }
