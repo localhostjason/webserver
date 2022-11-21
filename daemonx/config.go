@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/localhostjason/webserver/db"
 	"github.com/localhostjason/webserver/server/config"
+	"github.com/sirupsen/logrus"
 )
 
 func DumpDefaultConfig() {
@@ -17,6 +18,10 @@ func DumpDefaultConfig() {
 }
 
 func SyncDB() (err error) {
+	if !db.DBEnable() {
+		logrus.Info("no enable sql")
+		return
+	}
 	err = db.Connect()
 	if err != nil {
 		return errors.New(fmt.Sprintf("failed to migrate:%v", err))
@@ -28,4 +33,15 @@ func SyncDB() (err error) {
 
 	err = db.InitData()
 	return
+}
+
+func AutoMigrate() (err error) {
+	if !db.DBEnable() {
+		return
+	}
+	err = db.Connect()
+	if err != nil {
+		return errors.New(fmt.Sprintf("failed to migrate:%v", err))
+	}
+	return db.Migrate()
 }

@@ -52,6 +52,11 @@ func (m *MainServer) Run() {
 		return
 	}
 
+	if err := AutoMigrate(); err != nil {
+		fmt.Println("error when migrate db schema", err)
+		return
+	}
+
 	RunService(*singleMode, *svcCMD)
 }
 

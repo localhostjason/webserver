@@ -25,6 +25,11 @@ func Connect() error {
 	}
 }
 
+func DBEnable() bool {
+	_, enable := getDbTypeConfig()
+	return enable
+}
+
 var tableModels []interface{}
 
 // Migrate 初始化或升级表结构
