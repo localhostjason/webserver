@@ -14,8 +14,12 @@ type MainServer struct {
 	DefaultConfigPath string
 }
 
-func NewMainServer(configPath string) *MainServer {
-	return &MainServer{DefaultConfigPath: configPath}
+func NewMainServer() *MainServer {
+	return &MainServer{DefaultConfigPath: InitServerConfigFile()}
+}
+
+func (m *MainServer) SetServerConfigFile(file string) {
+	m.DefaultConfigPath = file
 }
 
 // Run 可根据自己业务 替换扩展

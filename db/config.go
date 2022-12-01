@@ -42,12 +42,12 @@ func init() {
 	}
 
 	sc := SqliteDBConfig{
-		DbFile: "/tmp/data.db",
+		DbFile: "data/data.db",
 		Debug:  false,
 	}
 
 	c := DbConfig{
-		DbType: "mysql",
+		DbType: "sqlite",
 		Enable: true,
 		Mysql:  mc,
 		Sqlite: sc,

@@ -15,12 +15,12 @@ var currentValues map[string]json.RawMessage
 func init() {
 	defaultValues = make(map[string]json.RawMessage)
 	currentValues = make(map[string]json.RawMessage)
-	_ = SetConfigFile("/tmp/console/console.json") // 为了方便测试， 否则每个测试里， 都要set一下
 }
 
 func SetConfigFile(path string) error {
 	configFile = path
 	if v, err := parseConfigFile(configFile); err != nil {
+		currentValues = v
 		return err
 	} else {
 		currentValues = v

@@ -3,15 +3,25 @@ package db
 import (
 	"errors"
 	"fmt"
+	"github.com/localhostjason/webserver/util"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+	"os"
+	"path/filepath"
 )
 
 // ConnectWithSqliteConfig 连接，检验配置是否正确
 func ConnectWithSqliteConfig(c SqliteDBConfig) error {
+	exePath, _ := os.Getwd()
+	dbFile := filepath.Join(exePath, c.DbFile)
 
-	db, err := gorm.Open(sqlite.Open(c.DbFile), &gorm.Config{
+	path, _ := filepath.Split(dbFile)
+	if !util.PathExists(path) {
+		_ = os.MkdirAll(path, os.ModePerm)
+	}
+
+	db, err := gorm.Open(sqlite.Open(dbFile), &gorm.Config{
 		FullSaveAssociations:   true,
 		SkipDefaultTransaction: true,
 		NamingStrategy:         schema.NamingStrategy{SingularTable: true},
