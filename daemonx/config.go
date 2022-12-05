@@ -50,6 +50,11 @@ func AutoMigrate() (err error) {
 }
 
 func InitServerConfigFile() string {
+	configFile := config.GetConfigFile()
+	if util.PathExists(configFile) {
+		return configFile
+	}
+
 	execPath, _ := os.Getwd()
 	configDir := filepath.Join(execPath, "config")
 	file := filepath.Join(configDir, "server.json")

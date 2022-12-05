@@ -3,11 +3,15 @@ package util
 import "os"
 
 func PathExists(path string) bool {
-	f, err := os.Stat(path)
+	_, err := os.Stat(path)
 
-	if err != nil && os.IsNotExist(err) {
+	if err == nil {
+		return true
+	}
+
+	if os.IsNotExist(err) {
 		return false
 	}
 
-	return f.IsDir()
+	return false
 }

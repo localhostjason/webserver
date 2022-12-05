@@ -13,8 +13,13 @@ import (
 
 // ConnectWithSqliteConfig 连接，检验配置是否正确
 func ConnectWithSqliteConfig(c SqliteDBConfig) error {
-	exePath, _ := os.Getwd()
-	dbFile := filepath.Join(exePath, c.DbFile)
+	var dbFile string
+	if filepath.IsAbs(c.DbFile) {
+		dbFile = c.DbFile
+	} else {
+		exePath, _ := os.Getwd()
+		dbFile = filepath.Join(exePath, c.DbFile)
+	}
 
 	path, _ := filepath.Split(dbFile)
 	if !util.PathExists(path) {
