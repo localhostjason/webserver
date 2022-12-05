@@ -49,7 +49,7 @@ func AutoMigrate() (err error) {
 	return db.Migrate()
 }
 
-func InitServerConfigFile() string {
+func InitDefaultServerConfigFile() string {
 	configFile := config.GetConfigFile()
 	if util.PathExists(configFile) {
 		return configFile

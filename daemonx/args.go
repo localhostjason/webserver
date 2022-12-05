@@ -15,7 +15,7 @@ type MainServer struct {
 }
 
 func NewMainServer() *MainServer {
-	return &MainServer{DefaultConfigPath: InitServerConfigFile()}
+	return &MainServer{}
 }
 
 func (m *MainServer) SetServerConfigFile(file string) {
@@ -24,7 +24,12 @@ func (m *MainServer) SetServerConfigFile(file string) {
 
 // Run 可根据自己业务 替换扩展
 func (m *MainServer) Run() {
-	configPath := flag.String("p", m.DefaultConfigPath, "path to config")
+	defaultConfigFile := m.DefaultConfigPath
+	if defaultConfigFile == "" {
+		defaultConfigFile = InitDefaultServerConfigFile()
+	}
+
+	configPath := flag.String("p", defaultConfigFile, "path to config")
 	initDB := flag.Bool("i", false, "int db")
 	dumpConfig := flag.Bool("d", false, "dump default config")
 
