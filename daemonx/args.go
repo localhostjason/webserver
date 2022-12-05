@@ -86,8 +86,8 @@ func (m *MainServer) LoadView(setView MainWorkFunc) {
 	SetViewFunc = setView
 }
 
-var AppLibHandler []func() error
+var PluginHandlers []func() error
 
-func (m *MainServer) LoadLibHandler(appLibHandler ...func() error) {
-	AppLibHandler = appLibHandler
+func (m *MainServer) LoadPluginHandler(pluginHandler ...func() error) {
+	PluginHandlers = pluginHandler
 }
