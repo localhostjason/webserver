@@ -25,10 +25,7 @@ func (m *MainServer) SetServerConfigFile(file string) {
 
 // Run 可根据自己业务 替换扩展
 func (m *MainServer) Run() {
-	defaultConfigFile := m.DefaultConfigPath
-	if defaultConfigFile == "" {
-		defaultConfigFile = server.InitDefaultServerConfigFile()
-	}
+	defaultConfigFile := server.InitDefaultServerConfigFile(m.DefaultConfigPath)
 
 	configPath := flag.String("p", defaultConfigFile, "path to config")
 	initDB := flag.Bool("i", false, "int db")
