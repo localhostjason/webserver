@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/localhostjason/webserver/server"
 	"github.com/localhostjason/webserver/server/config"
 	"google.golang.org/grpc"
 )
@@ -26,7 +27,7 @@ func (m *MainServer) SetServerConfigFile(file string) {
 func (m *MainServer) Run() {
 	defaultConfigFile := m.DefaultConfigPath
 	if defaultConfigFile == "" {
-		defaultConfigFile = InitDefaultServerConfigFile()
+		defaultConfigFile = server.InitDefaultServerConfigFile()
 	}
 
 	configPath := flag.String("p", defaultConfigFile, "path to config")

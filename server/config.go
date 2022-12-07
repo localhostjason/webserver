@@ -22,6 +22,30 @@ func PathExists(path string) bool {
 	return false
 }
 
+func InitDefaultServerConfigFile() string {
+	configFile := config.GetConfigFile()
+	if PathExists(configFile) {
+		return configFile
+	}
+
+	execPath, _ := os.Getwd()
+	configDir := filepath.Join(execPath, "config")
+	logDir := filepath.Join(execPath, "log")
+	file := filepath.Join(configDir, "server.json")
+
+	if !PathExists(configDir) {
+		_ = os.MkdirAll(configDir, os.ModePerm)
+	}
+
+	if !PathExists(logDir) {
+		_ = os.MkdirAll(logDir, os.ModePerm)
+	}
+	content, _ := config.GeneDefaultConfig()
+
+	_ = os.WriteFile(file, content, os.ModePerm)
+	return file
+}
+
 func init() {
 	execPath, _ := os.Getwd()
 	logPath := filepath.Join(execPath, "log")

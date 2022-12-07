@@ -5,10 +5,7 @@ import (
 	"fmt"
 	"github.com/localhostjason/webserver/db"
 	"github.com/localhostjason/webserver/server/config"
-	"github.com/localhostjason/webserver/util"
 	"github.com/sirupsen/logrus"
-	"os"
-	"path/filepath"
 )
 
 func DumpDefaultConfig() {
@@ -47,23 +44,4 @@ func AutoMigrate() (err error) {
 		return errors.New(fmt.Sprintf("failed to migrate:%v", err))
 	}
 	return db.Migrate()
-}
-
-func InitDefaultServerConfigFile() string {
-	configFile := config.GetConfigFile()
-	if util.PathExists(configFile) {
-		return configFile
-	}
-
-	execPath, _ := os.Getwd()
-	configDir := filepath.Join(execPath, "config")
-	file := filepath.Join(configDir, "server.json")
-
-	if !util.PathExists(configDir) {
-		_ = os.MkdirAll(configDir, os.ModePerm)
-	}
-	content, _ := config.GeneDefaultConfig()
-
-	_ = os.WriteFile(file, content, os.ModePerm)
-	return file
 }
