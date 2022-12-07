@@ -23,7 +23,7 @@ func PathExists(path string) bool {
 }
 
 func InitDefaultServerConfigFile(configFile string) string {
-	if PathExists(configFile) {
+	if configFile != "" {
 		return configFile
 	}
 
