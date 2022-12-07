@@ -2,22 +2,44 @@ package server
 
 import (
 	"github.com/localhostjason/webserver/server/config"
+	"os"
+	"path/filepath"
 )
 
 const _key = "webserver"
 
+func PathExists(path string) bool {
+	_, err := os.Stat(path)
+
+	if err == nil {
+		return true
+	}
+
+	if os.IsNotExist(err) {
+		return false
+	}
+
+	return false
+}
+
 func init() {
+	execPath, _ := os.Getwd()
+	logPath := filepath.Join(execPath, "log")
+	configPath := filepath.Join(execPath, "config")
+	certFile := filepath.Join(configPath, "web.crt")
+	keyFile := filepath.Join(configPath, "web.key")
+
 	c := ConfigServer{
 		LogLevel:       "info",
-		LogPath:        "/tmp/console",
+		LogPath:        logPath,
 		AccessLog:      "access-%Y%m%d.log",
 		ErrorLog:       "error-%Y%m%d.log",
 		SysLog:         "sys-%Y%m%d.log",
 		SSL:            false,
 		RequireCert:    false,
 		MinTlsVersion:  "1.2",
-		CertFile:       "web.crt",
-		KeyFile:        "web.key",
+		CertFile:       certFile,
+		KeyFile:        keyFile,
 		Bind6:          "::",
 		Bind:           "0.0.0.0",
 		Port:           8088,
