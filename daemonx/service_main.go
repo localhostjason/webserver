@@ -69,11 +69,6 @@ func startServer(toConsole bool) (*server.Server, error) {
 		log.Fatalln("failed to set log:", err)
 	}
 
-	err = s.SetLogConfig(toConsole)
-	if err != nil {
-		log.Fatalln("failed to set log:", err)
-	}
-
 	if err = db.Connect(); err != nil {
 		log.Fatalln(err)
 	}
