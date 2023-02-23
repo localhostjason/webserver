@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
+	"github.com/soheilhy/cmux"
 	"google.golang.org/grpc"
 	"net"
 	"net/http"
@@ -105,11 +106,14 @@ func (s *Server) Start() error {
 			s.conf.MaxHeaderBytes, s.conf.MinTlsVersion)
 		s.servers = append(s.servers, server)
 		// TODO error handling
-		go s.startServer(server, l)
+		m := cmux.New(l)
+		httpL := m.Match(cmux.HTTP1Fast())
+		go s.startServer(server, httpL)
 
 		if s.conf.EnableGrpc {
 			go func() {
-				gs := NewGrpcServer(l)
+				grpcL := m.Match(cmux.HTTP2HeaderField("content-type", "application/grpc"))
+				gs := NewGrpcServer(grpcL)
 				gs.StartGrpc(LoadGserverApiFunc)
 			}()
 		}

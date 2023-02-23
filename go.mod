@@ -11,6 +11,7 @@ require (
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
 	github.com/sevlyar/go-daemon v0.1.6
 	github.com/sirupsen/logrus v1.9.0
+	github.com/soheilhy/cmux v0.1.5
 	golang.org/x/sys v0.1.0
 	google.golang.org/grpc v1.50.1
 	gorm.io/driver/mysql v1.4.3
