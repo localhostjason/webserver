@@ -1,4 +1,4 @@
-package daemonx
+package example
 
 import (
 	"errors"
@@ -13,7 +13,6 @@ import (
 )
 
 var SetViewFunc func(r *gin.Engine) error
-var TaskGroupManage *TaskGroup
 
 type MainProc struct {
 	singleMode bool
@@ -34,11 +33,8 @@ func (m *MainProc) Run(svc *svc.Svc) {
 		return
 	}
 
-	// 可加载一些任务
-	TaskGroupManage.Run()
 	<-m.quit
 
-	TaskGroupManage.Stop()
 	_ = s.Stop()
 }
 
@@ -74,14 +70,6 @@ func startServer(toConsole bool) (*server.Server, error) {
 	}
 	if err = db.InitData(); err != nil {
 		log.Fatalln(err)
-	}
-
-	if PluginHandlers != nil && len(PluginHandlers) != 0 {
-		for _, f := range PluginHandlers {
-			if err = f(); err != nil {
-				log.Fatalln(err)
-			}
-		}
 	}
 
 	//s.SetRecovery(uv.DefaultRecovery(false))

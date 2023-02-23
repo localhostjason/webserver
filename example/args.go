@@ -1,4 +1,4 @@
-package daemonx
+package example
 
 import (
 	"flag"
@@ -67,18 +67,6 @@ func (m *MainServer) Run() {
 	RunService(*singleMode, *svcCMD)
 }
 
-func (m *MainServer) LoadTasks(task ...Task) {
-	if len(task) == 0 {
-		return
-	}
-
-	taskGroup := NewTaskGroup()
-	for _, t := range task {
-		taskGroup.Add(t)
-	}
-	TaskGroupManage = taskGroup
-}
-
 var LoadGserverApiFunc func(server *grpc.Server)
 
 func (m *MainServer) LoadGrpcServerApi(loadFunc func(*grpc.Server)) {
@@ -87,10 +75,4 @@ func (m *MainServer) LoadGrpcServerApi(loadFunc func(*grpc.Server)) {
 
 func (m *MainServer) LoadView(setView MainWorkFunc) {
 	SetViewFunc = setView
-}
-
-var PluginHandlers []func() error
-
-func (m *MainServer) LoadPluginHandler(pluginHandler ...func() error) {
-	PluginHandlers = pluginHandler
 }

@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/localhostjason/webserver/daemonx"
 	_ "github.com/localhostjason/webserver/db"
+	"github.com/localhostjason/webserver/example"
 	"github.com/sirupsen/logrus"
 	"sync"
 	"time"
@@ -60,12 +60,10 @@ func SetView(r *gin.Engine) error {
 func main() {
 	// 自定义的配置路径 可配置
 	//const defaultConfigPath = "./example.json"
-	s := daemonx.NewMainServer() // 默认在当前目录 自动生成配置文件和目录
+	s := example.NewMainServer() // 默认在当前目录 自动生成配置文件和目录
 
 	//s.SetServerConfigFile(defaultConfigPath) // 可指定 自己配置文件
 
-	// 可加载一些任务，比如：定时器任务
-	//s.LoadTasks(NewTestTask())
 	//s.LoadGrpcServerApi(...) 配置文件 enable_grpc = true 开启后。s.load grpc api 才有意义
 
 	s.LoadView(SetView)

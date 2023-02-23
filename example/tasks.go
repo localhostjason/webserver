@@ -1,4 +1,4 @@
-package daemonx
+package example
 
 import "sync"
 
@@ -24,20 +24,12 @@ func (t *TaskGroup) Add(task Task) {
 }
 
 func (t *TaskGroup) Run() {
-	if TaskGroupManage == nil {
-		return
-	}
-
 	for _, task := range t.Tasks {
 		task.Start()
 	}
 }
 
 func (t *TaskGroup) Stop() {
-	if TaskGroupManage == nil {
-		return
-	}
-
 	for _, task := range t.Tasks {
 		task.Stop()
 	}
