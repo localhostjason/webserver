@@ -91,6 +91,10 @@ func (s *Server) getListener() ([]net.Listener, error) {
 	return listener, nil
 }
 
+func (s *Server) GetListeners() ([]net.Listener, error) {
+	return s.getListener()
+}
+
 func (s *Server) Start() error {
 	listeners, err := s.getListener()
 	if err != nil {
