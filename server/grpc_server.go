@@ -28,10 +28,12 @@ func (g *GrpcServer) StartGrpc(loadFunc func(*grpc.Server)) {
 		loadFunc(grpcServer)
 	}
 
-	err := grpcServer.Serve(g.Listen)
-	if err != nil {
-		logrus.Fatalln("err:", err)
-	}
+	go func() {
+		err := grpcServer.Serve(g.Listen)
+		if err != nil {
+			logrus.Fatalln("err:", err)
+		}
+	}()
 }
 
 func StopGrpc() {
