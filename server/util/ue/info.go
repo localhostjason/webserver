@@ -5,8 +5,9 @@ import "fmt"
 // 使用时 要先注册一个info map ,给 操作日志用
 
 type Info struct {
-	Code string `json:"code"`
-	Msg  string `json:"msg"`
+	Code   string `json:"code"`
+	Action string `json:"action"`
+	Msg    string `json:"msg"`
 }
 
 func (e *Info) OperateInfo() string {
@@ -19,8 +20,9 @@ func NewInfo(code string, args ...interface{}) *Info {
 		panic("webserver.util.ue, invalid info code")
 	}
 	return &Info{
-		Code: code,
-		Msg:  fmt.Sprintf(e.Msg, args...),
+		Code:   code,
+		Action: e.Action,
+		Msg:    fmt.Sprintf(e.Msg, args...),
 	}
 }
 
