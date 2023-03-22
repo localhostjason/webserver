@@ -27,7 +27,7 @@ func InitDefaultServerConfigFile(configFile string) string {
 		return configFile
 	}
 
-	execPath, _ := os.Getwd()
+	execPath, _ := GetExeDir()
 	configDir := filepath.Join(execPath, "config")
 	logDir := filepath.Join(execPath, "log")
 	file := filepath.Join(configDir, "server.json")
@@ -50,7 +50,7 @@ func InitDefaultServerConfigFile(configFile string) string {
 }
 
 func init() {
-	execPath, _ := os.Getwd()
+	execPath, _ := GetExeDir()
 	logPath := filepath.Join(execPath, "log")
 	configPath := filepath.Join(execPath, "config")
 	certFile := filepath.Join(configPath, "web.crt")

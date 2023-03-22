@@ -10,7 +10,7 @@ func panicErr(reason string) {
 	panic(errors.New(reason))
 }
 
-func exePath() string {
+func exePathFile() string {
 	exe, err := os.Executable()
 	if err != nil {
 		panicErr("failed to get exe path " + err.Error())
@@ -20,20 +20,4 @@ func exePath() string {
 		panicErr("failed to get abs exe path " + err.Error())
 	}
 	return exePath
-}
-
-func exePathFile() string {
-	exe, err := os.Executable()
-
-	if err != nil {
-		panicErr("failed to get exe path " + err.Error())
-	}
-
-	filename := filepath.Base(exe)
-	exeDir, err := os.Getwd()
-	if err != nil {
-		panicErr("failed to get abs exe path " + err.Error())
-	}
-
-	return filepath.Join(exeDir, filename)
 }

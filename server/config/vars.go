@@ -14,16 +14,11 @@ const (
 var RootDir string
 
 func init() {
-	RootDir = getExePath2()
+	RootDir = getExePath()
 }
 
 func getExePath() string {
 	ex, _ := os.Executable()
 	exeDir, _ := filepath.Abs(filepath.Dir(ex))
-	return exeDir
-}
-
-func getExePath2() string {
-	exeDir, _ := os.Getwd()
 	return exeDir
 }

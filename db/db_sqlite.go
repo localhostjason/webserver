@@ -17,7 +17,7 @@ func ConnectWithSqliteConfig(c SqliteDBConfig) error {
 	if filepath.IsAbs(c.DbFile) {
 		dbFile = c.DbFile
 	} else {
-		exePath, _ := os.Getwd()
+		exePath, _ := GetExeDir()
 		dbFile = filepath.Join(exePath, c.DbFile)
 	}
 
