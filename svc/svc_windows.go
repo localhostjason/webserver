@@ -48,7 +48,7 @@ func (s *Svc) Install() {
 		panicErr("service already exists " + ss.Name)
 	}
 
-	exePath := exePath()
+	exePath := exePathFile()
 	exeArg := []string{"-k", cmdService}
 
 	ss, err = m.CreateService(s.name, exePath,
