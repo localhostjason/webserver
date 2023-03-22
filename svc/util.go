@@ -3,7 +3,6 @@ package svc
 import (
 	"errors"
 	"os"
-	"os/exec"
 	"path/filepath"
 )
 
@@ -24,10 +23,17 @@ func exePath() string {
 }
 
 func exePathFile() string {
-	file, err := exec.LookPath(os.Args[0])
+	exe, err := os.Executable()
+
 	if err != nil {
-		panicErr("failed to get exe file " + err.Error())
+		panicErr("failed to get exe path " + err.Error())
 	}
 
-	return file
+	filename := filepath.Base(exe)
+	exeDir, err := os.Getwd()
+	if err != nil {
+		panicErr("failed to get abs exe path " + err.Error())
+	}
+
+	return filepath.Join(exeDir, filename)
 }
