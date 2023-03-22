@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 )
 
-func GetWorkDir() (string, error) {
+func getWorkDir() (string, error) {
 	// 工作目录 类型 pwd
 	exeDir, err := os.Getwd()
 	return exeDir, err
@@ -18,5 +18,9 @@ func GetExeDir() (string, error) {
 		return "", err
 	}
 	exPath := filepath.Dir(ex)
+
+	if os.Getenv("DEBUG") != "" {
+		return getWorkDir()
+	}
 	return exPath, nil
 }
