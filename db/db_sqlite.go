@@ -21,7 +21,7 @@ func ConnectWithSqliteConfig(c SqliteDBConfig) error {
 		dbFile = filepath.Join(exePath, c.DbFile)
 	}
 
-	path, _ := filepath.Split(dbFile)
+	path := filepath.Dir(dbFile)
 	if !util.PathExists(path) {
 		_ = os.MkdirAll(path, os.ModePerm)
 	}
