@@ -1,6 +1,9 @@
 package db
 
-import "github.com/localhostjason/webserver/server/config"
+import (
+	"github.com/localhostjason/webserver/server/config"
+	"path/filepath"
+)
 
 const _key = "db"
 
@@ -41,8 +44,11 @@ func init() {
 		Debug:           false,
 	}
 
+	exePath, _ := GetExeDir()
+	dbFile := filepath.Join(exePath, "data", "data.db")
+
 	sc := SqliteDBConfig{
-		DbFile: "data/data.db",
+		DbFile: dbFile,
 		Debug:  false,
 	}
 
